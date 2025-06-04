@@ -26,7 +26,7 @@ export async function POST(req: Request) {
     }
 
     // Get the appropriate voice for the language
-    const voice = languageToVoice[language] || 'nova';
+    const voice = languageToVoice[language.toLowerCase()] || 'nova';
 
     // Call OpenAI TTS API
     const response = await openai.audio.speech.create({

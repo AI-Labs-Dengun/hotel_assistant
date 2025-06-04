@@ -23,48 +23,71 @@ export const languageNames: Record<Language, string> = {
 };
 
 export const getBrowserLanguage = (): Language => {
-  // Tenta obter o idioma principal do navegador
-  const browserLang = navigator.language.split('-')[0];
+  if (typeof window === 'undefined') {
+    console.log('⚠️ getBrowserLanguage: Window not available, returning English');
+    return 'en';
+  }
   
-  // Verifica se o idioma é suportado
+  console.log('🔍 getBrowserLanguage: Starting detection...');
+  
+  // Try to get the main browser language
+  const browserLang = navigator.language.split('-')[0].toLowerCase();
+  console.log('🌐 Primary browser language:', browserLang);
+  
+  // Check if the language is supported
   if (['pt', 'en', 'es', 'fr', 'de'].includes(browserLang)) {
+    console.log('✅ Primary language is supported:', browserLang);
     return browserLang as Language;
   }
 
-  // Tenta obter o primeiro idioma preferido do usuário
-  const preferredLang = navigator.languages[0]?.split('-')[0];
+  // Try to get the first preferred language
+  const preferredLang = navigator.languages[0]?.split('-')[0].toLowerCase();
+  console.log('🌐 Preferred language:', preferredLang);
+  
   if (preferredLang && ['pt', 'en', 'es', 'fr', 'de'].includes(preferredLang)) {
+    console.log('✅ Preferred language is supported:', preferredLang);
     return preferredLang as Language;
   }
 
-  // Fallback para inglês
+  // Fallback to English
+  console.log('⚠️ No supported language found, falling back to English');
   return 'en';
 };
 
 export const useTranslation = (language: Language) => {
+  console.log('🗣️ useTranslation called with language:', language);
+  
   const t = (key: string) => {
+    console.log('🔑 Translating key:', key, 'for language:', language);
+    
     const keys = key.split('.');
     let value: any = translations[language];
     
-    // Tenta obter a tradução no idioma atual
+    // Try to get translation in current language
     for (const k of keys) {
       if (value && typeof value === 'object' && k in value) {
         value = value[k];
       } else {
-        // Se não encontrar no idioma atual, tenta em inglês
+        console.log('⚠️ Key not found in', language, ', trying English fallback');
+        // If not found in current language, try English
         value = translations['en'];
         for (const k of keys) {
           if (value && typeof value === 'object' && k in value) {
             value = value[k];
           } else {
+            // If still not found, return the key
+            console.log('❌ Key not found in English either:', key);
             return key;
           }
         }
+        console.log('🔄 Using English fallback for:', key, '=', value);
         return typeof value === 'string' ? value : key;
       }
     }
     
-    return typeof value === 'string' ? value : key;
+    const result = typeof value === 'string' ? value : key;
+    console.log('✅ Translation result for', key, ':', result);
+    return result;
   };
 
   return { t };

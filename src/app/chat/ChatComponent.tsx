@@ -63,7 +63,6 @@ const ChatComponent = () => {
   const [currentPlayingMessageId, setCurrentPlayingMessageId] = useState<string | null>(null);
   const voiceModalRef = useRef<HTMLDivElement>(null);
 
-
   const handleScroll = () => {
     const el = chatContainerRef.current;
     if (!el) return;
@@ -84,7 +83,7 @@ const ChatComponent = () => {
     }
   }, [messages]);
 
-  // Carregar mensagem de boas-vindas quando o componente for montado
+  // Load welcome message when component mounts
   useEffect(() => {
     if (messages.length === 0) {
       setGreetingLoading(true);
@@ -112,10 +111,10 @@ const ChatComponent = () => {
             },
           ]);
           
-          // Reinicia o estado de interação do usuário quando uma nova mensagem de boas-vindas é mostrada
+          // Reset user interaction state when showing new welcome message
           setHasUserInteracted(false);
         } catch (err) {
-          console.error('Erro ao carregar mensagem de boas-vindas:', err);
+          console.error('Error loading welcome message:', err);
           setMessages([
             {
               id: 'welcome',
@@ -125,45 +124,45 @@ const ChatComponent = () => {
             },
           ]);
           
-          // Reinicia o estado de interação do usuário quando uma nova mensagem de boas-vindas é mostrada
+          // Reset user interaction state when showing new welcome message
           setHasUserInteracted(false);
         } finally {
           setGreetingLoading(false);
         }
       })();
     }
-  }, [language]);
+  }, [language, t]);
 
-  // Carregar sugestões
+  // Load suggestions
   useEffect(() => {
     try {
-      // Acessa diretamente o array de sugestões no objeto de traduções
+      // Access suggestions array directly from translations object
       const tooltipsArray = translations[language as Language]?.chat?.tooltips;
       
       if (Array.isArray(tooltipsArray) && tooltipsArray.length > 0) {
         const shuffled = [...tooltipsArray].sort(() => 0.5 - Math.random());
         setTooltips(shuffled.slice(0, 4));
       } else {
-        console.error('Não foi possível carregar as sugestões para o idioma:', language);
+        console.error('Could not load suggestions for language:', language);
         setTooltips([]);
       }
     } catch (error) {
-      console.error('Erro ao carregar sugestões:', error);
+      console.error('Error loading suggestions:', error);
       setTooltips([]);
     }
   }, [language]);
 
-  // Mostrar modal quando as sugestões estiverem carregadas e a mensagem de boas-vindas for exibida
+  // Show modal when suggestions are loaded and welcome message is displayed
   useEffect(() => {
-    // Só verificamos se devemos exibir o modal quando houver tooltips, mensagens,
-    // e o usuário ainda não interagiu
+    // We only check if we should show the modal when there are tooltips, messages,
+    // and the user hasn't interacted yet
     if (tooltips.length > 0 && messages.length > 0 && !hasUserInteracted && !greetingLoading) {
       
-      // Em dispositivos móveis, mostrar o modal automaticamente
+      // Automatically show the modal on mobile devices
       const isMobile = window.innerWidth < 768;
       if (isMobile) {
         const timer = setTimeout(() => {
-          if (!hasUserInteracted) { // Verificar novamente antes de exibir
+          if (!hasUserInteracted) { // Check again before showing
             setShowTooltipsModal(false);
           }
         }, 1000);
@@ -173,7 +172,7 @@ const ChatComponent = () => {
     }
   }, [tooltips, messages, hasUserInteracted, greetingLoading]);
 
-  // Detectar redimensionamento da tela para ajustar a exibição das sugestões
+  // Detect screen resize to adjust suggestions display
   useEffect(() => {
     const handleResize = () => {
       if (tooltips.length > 0 && messages.length > 0 && !hasUserInteracted) {
@@ -214,7 +213,7 @@ const ChatComponent = () => {
   const playTTS = async (text: string, messageId: string, onEnd?: () => void) => {
     if (typeof window === 'undefined') return;
     
-    const loadingToast = showToast.loading('Carregando áudio...');
+    const loadingToast = showToast.loading(t('voice.loading'));
     
     try {
       if (audioRef.current) {
@@ -224,7 +223,10 @@ const ChatComponent = () => {
       const res = await fetch('/api/tts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text }),
+        body: JSON.stringify({ 
+          text,
+          language: language
+        }),
       });
       if (!res.ok) throw new Error('TTS failed');
       const audioBlob = await res.blob();
@@ -257,7 +259,7 @@ const ChatComponent = () => {
       setIsAudioPlaying(false);
       setIsAudioPaused(false);
       setCurrentPlayingMessageId(null);
-      showToast.error('Erro ao carregar áudio');
+      showToast.error(t('voice.error'));
       if (onEnd) onEnd();
     }
   };
@@ -316,7 +318,7 @@ const ChatComponent = () => {
     handleFirstInteraction();
     if (!newMessage.trim()) return;
 
-    // Detecta informações de contato na mensagem
+    // Detect contact information in message
     const { email, phone } = detectContactInfo(newMessage);
     
     const userMsg: Message = {
@@ -329,12 +331,12 @@ const ChatComponent = () => {
     setNewMessage('');
     setLoading(true);
 
-    // Se detectou email ou telefone, envia o email
+    // If email or phone detected, send email
     if (email || phone) {
       await sendEmailWithConversation(email, phone);
     }
 
-    // Prepara o histórico da conversa para enviar ao ChatGPT
+    // Prepare conversation history for sending to ChatGPT
     const conversationHistory = messages.map(msg => ({
       user: msg.user,
       content: msg.content
@@ -793,7 +795,7 @@ const ChatComponent = () => {
           )}
         </main>
 
-        {/* Sugestões */}
+        {/* Suggestions */}
         {tooltips.length > 0 && !hasUserInteracted && (
           <div className="w-full px-6">
             <div className="w-full border-t border-white/30 mb-4" />
