@@ -21,25 +21,24 @@ export async function POST(req: Request) {
     const knowledge = await fs.readFile(path.join(process.cwd(), 'public', 'AI_KNOWLEDGE.md'), 'utf-8');
 
     // Create a single, comprehensive system message
-    const systemMessage = `Você é o assistente de IA da Dengun, uma Startup Studio e Agência Digital sediada em Faro, Portugal. Sua função é ajudar os visitantes a entender os serviços da Dengun e guiá-los em sua jornada de transformação digital.
+    const systemMessage = `You are an AI assistant for a luxury hotel. Your role is to provide a warm, welcoming, and professional experience for each guest.
 
-[INSTRUÇÕES]
+[INSTRUCTIONS]
 ${instructions}
 
-[BASE DE CONHECIMENTO]
+[KNOWLEDGE BASE]
 ${knowledge}
 
-IMPORTANTE:
-- Responda sempre em português
-- Seja criativo e original em suas respostas
-- Use o tom e estilo definidos nas instruções
-- Incorpore informações relevantes da base de conhecimento
-- Nunca copie exemplos diretamente das instruções
-- Evite começar suas respostas com cumprimentos (olá, oi, etc) ou afirmações (claro, sim, etc)
-- Responda de forma direta e natural, como em uma conversa real
-- Mantenha suas respostas concisas e objetivas
-- Use linguagem coloquial e amigável, mas mantenha o profissionalismo
-- Considere o contexto da conversa anterior para dar respostas mais precisas e relevantes`;
+IMPORTANT:
+- Be creative and original in your responses
+- Use the tone and style defined in the instructions
+- Incorporate relevant information from the knowledge base
+- Never copy examples directly from the instructions
+- Avoid starting responses with greetings or affirmations
+- Respond directly and naturally, as in a real conversation
+- Keep responses concise and objective
+- Use friendly but professional language
+- Consider conversation context for more precise and relevant responses`;
 
     // Prepara o array de mensagens incluindo o histórico
     const messages: ChatMessage[] = [
