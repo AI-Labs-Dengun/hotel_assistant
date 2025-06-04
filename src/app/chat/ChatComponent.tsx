@@ -669,7 +669,7 @@ const ChatComponent = () => {
       <Toaster position="bottom-right" />
       <div className="w-full h-screen md:h-[90vh] md:max-w-2xl flex flex-col rounded-none md:rounded-3xl shadow-2xl border border-white/30">
         <header className="p-4 md:p-4 flex justify-between items-center relative border-b border-white/20">
-          <h1 className="text-2xl font-bold text-white drop-shadow">{t('chat.assistantTitle') || 'Assistente IA'}</h1>
+          <h1 className="text-2xl font-bold text-white drop-shadow">{t('chat.assistantTitle') || 'AI Assistant'}</h1>
           <div className="flex items-center gap-4">
             <a
               href="tel:304502776"
