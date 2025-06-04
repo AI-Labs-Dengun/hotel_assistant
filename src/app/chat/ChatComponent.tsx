@@ -607,7 +607,6 @@ const ChatComponent = () => {
         setMessages((prev) => [...prev, userMsg]);
         setLoading(true);
         try {
-          // Prepara o histórico da conversa para enviar ao ChatGPT
           const conversationHistory = messages.map(msg => ({
             user: msg.user,
             content: msg.content
@@ -622,15 +621,24 @@ const ChatComponent = () => {
             }),
           });
           const aiData = await res.json();
+          const botResponse = aiData.reply || 'Desculpe, não consegui responder agora.';
+          
+          // Add bot response to chat
           setMessages((prev) => [
             ...prev,
             {
               id: 'bot-' + Date.now(),
-              content: aiData.reply || 'Desculpe, não consegui responder agora.',
+              content: botResponse,
               user: 'bot',
               created_at: new Date().toISOString(),
             },
           ]);
+
+          // Play bot response
+          setVoiceModalMode('ai-speaking');
+          await playTTS(botResponse, 'bot-' + Date.now(), () => {
+            setVoiceModalMode('ready-to-record');
+          });
         } catch (err) {
           setMessages((prev) => [
             ...prev,
@@ -945,7 +953,7 @@ const ChatComponent = () => {
         }}
       />
       <VoiceModal
-        isOpen={voiceModalOpen && (voiceModalMode === 'ready-to-record' || voiceModalMode === 'recording')}
+        isOpen={voiceModalOpen}
         onClose={handleVoiceModalClose}
         onSubmit={handleAudioSubmit}
         mode={voiceModalMode}
