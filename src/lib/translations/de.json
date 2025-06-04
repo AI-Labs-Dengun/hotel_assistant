@@ -30,14 +30,14 @@
     },
     "assistantTitle": "KI-Assistent",
     "tooltips": [
-      "Wie kann ich mein Startup skalieren?",
-      "Ich brauche ein MVP für meine Idee",
-      "Ich möchte mein SEO und digitales Marketing verbessern",
-      "Ich brauche eine Website für mein Unternehmen",
-      "Wie kann ich meine Online-Präsenz optimieren?",
-      "Ich möchte eine mobile App entwickeln",
-      "Ich brauche Hilfe bei der Datenanalyse",
-      "Wie kann KI meinem Unternehmen helfen?"
+      "Wie sind Ihre Preise und Verfügbarkeiten?",
+      "Wie kann ich eine Reservierung vornehmen?",
+      "Welche Dienstleistungen und Annehmlichkeiten bieten Sie?",
+      "Können Sie mir bei lokalen Empfehlungen helfen?",
+      "Was ist in Ihrem Frühstücksservice enthalten?",
+      "Haben Sie Parkplätze und Transportmöglichkeiten?",
+      "Wie sind Ihre Check-in und Check-out Zeiten?",
+      "Können Sie mir bei besonderen Wünschen helfen?"
     ],
     "suggestions": "Vorschläge",
     "disclaimer": "Der Chat kann Fehler machen. Bitte überprüfen Sie wichtige Informationen.",

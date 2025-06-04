@@ -30,14 +30,14 @@
     },
     "assistantTitle": "AI Assistant",
     "tooltips": [
-      "How can I scale my startup?",
-      "I need an MVP for my idea",
-      "I want to improve my SEO and digital marketing",
-      "I need a website for my business",
-      "How can I optimize my online presence?",
-      "I want to develop a mobile app",
-      "I need help with data analysis",
-      "How can AI help my business?"
+      "What are your room rates and availability?",
+      "How can I make a reservation?",
+      "What amenities and services do you offer?",
+      "Can you help me with local recommendations?",
+      "What's included in your breakfast service?",
+      "Do you have parking and transportation options?",
+      "What are your check-in and check-out times?",
+      "Can you assist me with special requests?"
     ],
     "suggestions": "Suggestions",
     "disclaimer": "Chat may make mistakes. Consider verifying important information.",

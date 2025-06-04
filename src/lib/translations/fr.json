@@ -44,14 +44,14 @@
     },
     "assistantTitle": "Assistant IA",
     "tooltips": [
-      "Comment puis-je développer ma startup ?",
-      "J'ai besoin d'un MVP pour mon idée",
-      "Je veux améliorer mon SEO et mon marketing digital",
-      "J'ai besoin d'un site web pour mon entreprise",
-      "Comment puis-je optimiser ma présence en ligne ?",
-      "Je veux développer une application mobile",
-      "J'ai besoin d'aide pour l'analyse de données",
-      "Comment l'IA peut-elle aider mon entreprise ?"
+      "Quels sont vos tarifs et disponibilités ?",
+      "Comment puis-je faire une réservation ?",
+      "Quels services et commodités offrez-vous ?",
+      "Pouvez-vous m'aider avec des recommandations locales ?",
+      "Qu'est-ce qui est inclus dans votre service petit-déjeuner ?",
+      "Avez-vous un parking et des options de transport ?",
+      "Quelles sont vos heures d'arrivée et de départ ?",
+      "Pouvez-vous m'aider avec des demandes spéciales ?"
     ],
     "suggestions": "Suggestions",
     "disclaimer": "Le Chat peut commettre des erreurs. Veuillez vérifier les informations importantes.",
