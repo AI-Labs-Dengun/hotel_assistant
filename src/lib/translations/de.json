@@ -112,8 +112,9 @@
     "startRecording": "Aufnahme starten",
     "stopRecording": "Aufnahme stoppen",
     "recording": "Aufnahme läuft...",
-    "processing": "Wird verarbeitet...",
-    "error": "Fehler bei der Audioaufnahme",
-    "aiAssistant": "KI-Assistent"
+    "processing": "Verarbeitung...",
+    "error": "Fehler bei Audioaufnahme",
+    "aiAssistant": "KI-Assistent",
+    "user": "Gast"
   }
 } 

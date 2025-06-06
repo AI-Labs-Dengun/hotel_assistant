@@ -91,6 +91,12 @@
     "loading": "A carregar áudio...",
     "start": "Iniciar Gravação",
     "stop": "Parar Gravação",
-    "aiAssistant": "Assistente IA"
+    "startRecording": "Iniciar Gravação",
+    "stopRecording": "Parar Gravação",
+    "recording": "A gravar...",
+    "processing": "A processar...",
+    "error": "Erro ao gravar áudio",
+    "aiAssistant": "Assistente IA",
+    "user": "Hóspede"
   }
 } 

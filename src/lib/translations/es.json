@@ -103,8 +103,8 @@
   },
   "voice": {
     "title": "Grabación de Voz",
-    "aiSpeaking": "IA Hablando...",
-    "aiThinking": "IA Pensando...",
+    "aiSpeaking": "IA hablando...",
+    "aiThinking": "IA pensando...",
     "loading": "Cargando audio...",
     "start": "Iniciar Grabación",
     "stop": "Detener Grabación",
@@ -113,6 +113,7 @@
     "recording": "Grabando...",
     "processing": "Procesando...",
     "error": "Error al grabar audio",
-    "aiAssistant": "Asistente IA"
+    "aiAssistant": "Asistente IA",
+    "user": "Huésped"
   }
 } 

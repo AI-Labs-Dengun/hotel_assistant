@@ -342,13 +342,12 @@ const ChatComponent = () => {
       content: msg.content
     }));
 
-    const prompt = `${newMessage}\n\nPlease answer ONLY in ${languageNames[language as Language] || 'English'}, regardless of the language of the question. Do not mention language or your ability to assist in other languages. Keep your answer short and concise.`;
     try {
       const res = await fetch('/api/chatgpt', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          message: prompt,
+          message: newMessage,
           conversationHistory 
         }),
       });
@@ -547,6 +546,7 @@ const ChatComponent = () => {
   }, [isTypewriterActive, isNearBottom]);
 
   const handleTooltipClick = async (tooltip: string) => {
+    setShowTooltips(false);
     handleFirstInteraction();
     const userMsg: Message = {
       id: 'user-' + Date.now(),
@@ -556,12 +556,11 @@ const ChatComponent = () => {
     };
     setMessages((prev) => [...prev, userMsg]);
     setLoading(true);
-    const prompt = `${tooltip}\n\nPlease answer ONLY in ${languageNames[language as Language] || 'English'}, regardless of the language of the question. Do not mention language or your ability to assist in other languages. Keep your answer short and concise.`;
     try {
       const res = await fetch('/api/chatgpt', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: prompt }),
+        body: JSON.stringify({ message: tooltip }),
       });
       const data = await res.json();
       setMessages((prev) => [

@@ -95,16 +95,17 @@
   },
   "voice": {
     "title": "Enregistrement Vocal",
-    "aiSpeaking": "IA en train de parler...",
-    "aiThinking": "IA en réflexion...",
-    "loading": "Chargement de l'audio...",
-    "start": "Démarrer l'enregistrement",
+    "aiSpeaking": "IA parle...",
+    "aiThinking": "IA réfléchit...",
+    "loading": "Chargement audio...",
+    "start": "Commencer l'enregistrement",
     "stop": "Arrêter l'enregistrement",
-    "startRecording": "Démarrer l'Enregistrement",
-    "stopRecording": "Arrêter l'Enregistrement",
-    "recording": "Enregistrement en cours...",
-    "processing": "Traitement en cours...",
-    "error": "Erreur lors de l'enregistrement audio",
-    "aiAssistant": "Assistant IA"
+    "startRecording": "Commencer l'enregistrement",
+    "stopRecording": "Arrêter l'enregistrement",
+    "recording": "Enregistrement...",
+    "processing": "Traitement...",
+    "error": "Erreur d'enregistrement audio",
+    "aiAssistant": "Assistant IA",
+    "user": "Invité"
   }
 } 

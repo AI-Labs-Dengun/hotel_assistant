@@ -25,8 +25,6 @@ const VoiceModal: React.FC<VoiceModalProps> = ({
   const { t } = useTranslation(language);
   const { dark } = useTheme();
 
-  console.log('VoiceModal dark mode:', dark); // Debug log
-
   if (!isOpen) return null;
 
   return (
@@ -44,7 +42,7 @@ const VoiceModal: React.FC<VoiceModalProps> = ({
 
         <div className="flex flex-col items-center gap-8">
           <h2 className={`text-2xl font-bold text-center drop-shadow ${dark ? '!text-white' : '!text-black'}`}>
-            {t('voice.aiAssistant')}
+            {(mode === 'ready-to-record' || mode === 'recording') ? t('voice.user') : t('voice.aiAssistant')}
           </h2>
 
           <div className="relative">

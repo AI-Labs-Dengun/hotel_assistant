@@ -114,6 +114,7 @@
     "recording": "Recording...",
     "processing": "Processing...",
     "error": "Error recording audio",
-    "aiAssistant": "AI Assistant"
+    "aiAssistant": "AI Assistant",
+    "user": "Guest"
   }
 } 
