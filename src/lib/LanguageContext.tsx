@@ -116,22 +116,25 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   // Show loading until cache is cleared and language is detected
   if (!mounted || !cacheCleared) {
+    // Detect if user prefers dark mode
+    const prefersDark = typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
     return (
       <div style={{ 
         display: 'flex', 
         justifyContent: 'center', 
         alignItems: 'center', 
         height: '100vh',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        color: 'white',
+        background: prefersDark ? '#23232b' : '#ffffff',
+        color: prefersDark ? '#ffffff' : '#000000',
         fontFamily: 'system-ui, -apple-system, sans-serif'
       }}>
         <div style={{ textAlign: 'center' }}>
           <div style={{ 
             width: '50px', 
             height: '50px', 
-            border: '3px solid rgba(255,255,255,0.3)',
-            borderTop: '3px solid white',
+            border: `3px solid ${prefersDark ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.3)'}`,
+            borderTop: `3px solid ${prefersDark ? '#ffffff' : '#000000'}`,
             borderRadius: '50%',
             animation: 'spin 1s linear infinite',
             margin: '0 auto 20px'

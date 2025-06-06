@@ -35,7 +35,7 @@ const VoiceModal: React.FC<VoiceModalProps> = ({
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 transition-colors p-2 hover:bg-white/10 rounded-full"
+          className="absolute top-4 right-4 transition-colors p-2 hover:bg-gray-500/20 rounded-full"
         >
           <FaTimes className={`text-xl ${dark ? '!text-white' : '!text-black'}`} />
         </button>
@@ -81,7 +81,7 @@ const VoiceModal: React.FC<VoiceModalProps> = ({
           {(mode === 'ready-to-record' || mode === 'recording') && (
             <button
               onClick={onToggleRecord}
-              className={`px-8 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-200 w-auto shadow-lg hover:shadow-xl hover:scale-105`}
+              className={`px-8 py-3 rounded-xl font-semibold transition-all duration-200 w-auto shadow-lg hover:shadow-xl hover:scale-105 cursor-pointer ${dark ? 'bg-white/20 text-white hover:bg-white/30' : 'bg-gray-200 text-black hover:bg-gray-300'}`}
             >
               {mode === 'recording' ? t('voice.stop') : t('voice.start')}
             </button>

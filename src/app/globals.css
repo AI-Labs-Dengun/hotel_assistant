@@ -53,7 +53,7 @@
 
   .auth-button {
     @apply w-full px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600
-           text-white font-semibold hover:from-purple-700 hover:to-blue-700
+           text-white font-semibold hover:from-purple-800 hover:to-blue-800
            transition-colors duration-200;
   }
 
@@ -98,7 +98,7 @@ html.dark .auth-button {
   background: linear-gradient(to right, #5f67ea, #3a0ca3);
 }
 html.dark .auth-button:hover {
-  background: linear-gradient(to right, #03045e, #3a0ca3);
+  background: linear-gradient(to right, #3a0ca3, #030080);
 }
 
 html.dark input, html.dark textarea {
@@ -151,7 +151,7 @@ html.dark input, html.dark textarea {
 }
 
 .auth-button:hover {
-  background: linear-gradient(to right, #7c3aed, #2563eb);
+  background: linear-gradient(to right, #6b21a8, #1e40af);
 }
 
 button, [type="button"], [type="submit"] {
@@ -193,10 +193,10 @@ html.dark input::placeholder, html.dark textarea::placeholder {
 
 /* Dark mode custom scrollbar */
 .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #541d85 0%, #1c2458 100%);
+  background: #d1d5db;
 }
 .dark .custom-scrollbar {
-  scrollbar-color: #541d85 #0000;
+  scrollbar-color: #d1d5db #0000;
 }
 
 input:focus, textarea:focus {
