@@ -23,17 +23,44 @@ const EmojiPicker = dynamic(() => import('@emoji-mart/react').then(mod => mod.de
 // Simple markdown renderer component
 const MarkdownRenderer: React.FC<{ content: string }> = ({ content }) => {
   return (
-    <ReactMarkdown
-      components={{
-        p: ({ children }) => <span>{children}</span>,
-        strong: ({ children }) => <strong>{children}</strong>,
-        em: ({ children }) => <em>{children}</em>,
-        code: ({ children }) => <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">{children}</code>,
-      }}
-    >
-      {content}
-    </ReactMarkdown>
+    <div className="w-full break-words whitespace-pre-wrap overflow-wrap-anywhere">
+      <ReactMarkdown
+        components={{
+          strong: ({ children }) => <strong className="font-bold">{children}</strong>,
+          em: ({ children }) => <em className="italic">{children}</em>,
+          code: ({ children }) => <code className="bg-gray-200 dark:bg-gray-700 px-1 rounded text-sm break-all">{children}</code>,
+          p: ({ children }) => <p className="break-words whitespace-pre-wrap">{children}</p>,
+        }}
+      >
+        {content}
+      </ReactMarkdown>
+    </div>
   );
+};
+
+const TypewriterMarkdownRenderer: React.FC<{ content: string; speed?: number }> = ({ content, speed = 30 }) => {
+  const [displayedContent, setDisplayedContent] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (!content) return;
+    
+    setDisplayedContent('');
+    setCurrentIndex(0);
+  }, [content]);
+
+  useEffect(() => {
+    if (currentIndex < content.length) {
+      const timer = setTimeout(() => {
+        setDisplayedContent(content.slice(0, currentIndex + 1));
+        setCurrentIndex(currentIndex + 1);
+      }, speed);
+
+      return () => clearTimeout(timer);
+    }
+  }, [currentIndex, content, speed]);
+
+  return <MarkdownRenderer content={displayedContent} />;
 };
 
 interface Message {
@@ -744,13 +771,14 @@ const ChatComponent = () => {
                     </div>
                   )}
                   <div
-                    className={`rounded-xl p-4 border-[0.5px] ${msg.user === 'me' ? (dark ? 'border-white text-white' : 'border-gray-300 text-black') : (dark ? 'border-white text-white' : 'border-gray-300 text-black')} bg-transparent max-w-[90%] md:max-w-[90%] min-w-[100px] text-base relative ${msg.user === 'me' ? 'ml-2' : 'mr-2'}`}
+                    className={`rounded-xl p-4 border-[0.5px] ${msg.user === 'me' ? (dark ? 'border-white text-white' : 'border-gray-300 text-black') : (dark ? 'border-white text-white' : 'border-gray-300 text-black')} bg-transparent max-w-[90%] md:max-w-[90%] min-w-[100px] text-base relative ${msg.user === 'me' ? 'ml-2' : 'mr-2'} break-words overflow-hidden word-wrap`}
+                    style={{ wordWrap: 'break-word', overflowWrap: 'break-word', hyphens: 'auto' }}
                   >
 
                     {/* typing effect for bot messages */}
-                    <div className="flex items-center gap-2 mb-4">
+                    <div className="flex flex-col gap-2 mb-4 w-full break-words overflow-hidden">
                       {msg.user === 'bot' ? (
-                        <MarkdownRenderer content={msg.content} />
+                        <TypewriterMarkdownRenderer content={msg.content} />
                       ) : (
                         <MarkdownRenderer content={msg.content} />
                       )}
