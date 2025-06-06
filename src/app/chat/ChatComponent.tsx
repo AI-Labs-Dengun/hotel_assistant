@@ -91,6 +91,7 @@ const ChatComponent = () => {
   const audioChunksRef = useRef<BlobPart[]>([]);
   const [voiceModalMode, setVoiceModalMode] = useState<'ai-speaking' | 'ready-to-record' | 'recording' | 'thinking' | 'loading'>('ai-speaking');
   const [greetingLoading, setGreetingLoading] = useState(false);
+  const greetingLoadedRef = useRef(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isNearBottom, setIsNearBottom] = useState(true);
   const chatContainerRef = useRef<HTMLDivElement | null>(null);
@@ -127,10 +128,12 @@ const ChatComponent = () => {
     }
   }, [messages]);
 
-  // Load welcome message when component mounts
+  // Load welcome message when component mounts - only once
   useEffect(() => {
-    if (messages.length === 0) {
+    if (messages.length === 0 && !greetingLoadedRef.current && !greetingLoading) {
+      greetingLoadedRef.current = true;
       setGreetingLoading(true);
+      
       (async () => {
         try {
           const [instructionsRes, knowledgeRes] = await Promise.all([
@@ -139,17 +142,25 @@ const ChatComponent = () => {
           ]);
           const instructionsText = await instructionsRes.text();
           const knowledgeText = await knowledgeRes.text();
-          const greetingPrompt = `Generate a creative, warm, and original greeting for a new user in ${language}. Use the INSTRUCTIONS to define the tone and style of the message, and the KNOWLEDGE BASE to incorporate specific information about our luxury hotel and its services. Be original and do not copy any examples from the instructions. The greeting should reflect our professional and welcoming personality, mentioning some of the main services and inviting the user to explore how we can help. Keep your answer very short (1-2 sentences).`;
+          
+          // Get current language at time of execution
+          const currentLanguage = language || 'en';
+          const greetingPrompt = `Generate a creative, warm, and original greeting for a new user in ${currentLanguage}. Use the INSTRUCTIONS to define the tone and style of the message, and the KNOWLEDGE BASE to incorporate specific information about our luxury hotel and its services. Be original and do not copy any examples from the instructions. The greeting should reflect our professional and welcoming personality, mentioning some of the main services and inviting the user to explore how we can help. Keep your answer very short (1-2 sentences).`;
+          
           const res = await fetch('/api/chatgpt', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message: greetingPrompt }),
           });
           const data = await res.json();
+          
+          // Only set message if we got a valid response
+          const greetingContent = data.reply && data.reply.trim() ? data.reply : "Hello! Welcome to Vale do Lobo Beach Hotel. How can I assist you today?";
+          
           setMessages([
             {
               id: 'welcome',
-              content: data.reply && data.reply.trim() ? data.reply : t('chat.greeting'),
+              content: greetingContent,
               user: 'bot',
               created_at: new Date().toISOString(),
             },
@@ -162,7 +173,7 @@ const ChatComponent = () => {
           setMessages([
             {
               id: 'welcome',
-              content: t('chat.greeting'),
+              content: "Hello! Welcome to Vale do Lobo Beach Hotel. How can I assist you today?",
               user: 'bot',
               created_at: new Date().toISOString(),
             },
@@ -175,7 +186,7 @@ const ChatComponent = () => {
         }
       })();
     }
-  }, [language, t]);
+  }, [messages.length]); // Only depend on messages.length
 
   // Load suggestions
   useEffect(() => {
@@ -400,7 +411,7 @@ const ChatComponent = () => {
         ...prev,
         {
           id: 'bot-' + Date.now(),
-          content: data.reply || t('chat.greeting'),
+          content: data.reply && data.reply.trim() ? data.reply : t('common.error'),
           user: 'bot',
           created_at: new Date().toISOString(),
         },
@@ -611,7 +622,7 @@ const ChatComponent = () => {
         ...prev,
         {
           id: 'bot-' + Date.now(),
-          content: data.reply || t('chat.greeting'),
+          content: data.reply && data.reply.trim() ? data.reply : t('common.error'),
           user: 'bot',
           created_at: new Date().toISOString(),
         },
