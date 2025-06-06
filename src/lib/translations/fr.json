@@ -104,6 +104,7 @@
     "stopRecording": "Arrêter l'Enregistrement",
     "recording": "Enregistrement en cours...",
     "processing": "Traitement en cours...",
-    "error": "Erreur lors de l'enregistrement audio"
+    "error": "Erreur lors de l'enregistrement audio",
+    "aiAssistant": "Assistant IA"
   }
 } 

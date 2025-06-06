@@ -20,24 +20,29 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #23232b;
     --foreground: #ededed;
   }
 }
 
 @layer base {
   body {
-    @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-white;
+    @apply bg-white text-black;
+  }
+  .dark body {
+    @apply bg-[#23232b] text-white;
   }
 }
 
 @layer components {
   .bg-auth-gradient {
-    @apply bg-gradient-to-r from-purple-600 via-purple-800 to-blue-900;
+    @apply bg-white dark:bg-[#23232b];
+    color: #000 !important;
   }
 
   .auth-card {
     @apply bg-white/70 dark:bg-gray-800/70 rounded-lg shadow-lg p-6;
+    @apply text-black;
   }
 
   .auth-input {
@@ -63,17 +68,24 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+html {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
 html.dark {
-  --background: #0a0a23;
+  --background: #23232b;
   --foreground: #ededed;
 }
 
 html.dark .bg-auth-gradient {
-  background: linear-gradient(135deg, #9133e7 0%, #541d85 50%, #1c2458 100%);
+  background: #23232b !important;
+  color: #fff !important;
 }
 
 html.dark .auth-card {
   background: rgba(20, 20, 40, 0.7);
+  @apply text-white;
 }
 
 html.dark .auth-input {
@@ -95,7 +107,8 @@ html.dark input, html.dark textarea {
 }
 
 .bg-auth-gradient {
-  background: linear-gradient(135deg, #ea84c3 0%, #85b5f8 50%, #bbd8ff 100%);
+  background: #fff !important;
+  color: #000 !important;
 }
 
 .auth-card {
@@ -109,6 +122,7 @@ html.dark input, html.dark textarea {
   display: flex;
   flex-direction: column;
   align-items: center;
+  @apply text-black;
 }
 
 .auth-input {

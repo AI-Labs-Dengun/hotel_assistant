@@ -112,6 +112,7 @@
     "stopRecording": "Detener Grabación",
     "recording": "Grabando...",
     "processing": "Procesando...",
-    "error": "Error al grabar audio"
+    "error": "Error al grabar audio",
+    "aiAssistant": "Asistente IA"
   }
 } 

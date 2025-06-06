@@ -2,6 +2,7 @@ import React from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { useLanguage } from '../lib/LanguageContext';
 import { useTranslation } from '../lib/i18n';
+import { useTheme } from '../lib/theme';
 
 interface CommentModalProps {
   isOpen: boolean;
@@ -19,6 +20,7 @@ const CommentModal: React.FC<CommentModalProps> = ({
   const [comment, setComment] = React.useState('');
   const { language } = useLanguage();
   const { t } = useTranslation(language);
+  const { dark } = useTheme();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,15 +41,15 @@ const CommentModal: React.FC<CommentModalProps> = ({
         >
           <FaTimes className="text-xl text-white" />
         </button>
-        <h2 className="text-xl font-semibold mb-4 text-white">{t('chat.addComment')}</h2>
+        <h2 className={`text-xl font-semibold mb-4 ${dark ? 'text-white' : 'text-black'}`}>{t('chat.addComment')}</h2>
         {message && (
-          <div className="mb-4 p-3 rounded bg-white/10 text-white border border-white/20 text-sm">
+          <div className={`mb-4 p-3 rounded ${dark ? 'bg-white/10 text-white border border-white/20' : 'bg-gray-100 text-black border border-gray-300'} text-sm`}>
             {message.content}
           </div>
         )}
         <form onSubmit={handleSubmit}>
           <textarea
-            className="w-full p-2 border rounded bg-transparent text-white border-white/30 focus:border-white focus:ring-0 placeholder-white/80"
+            className={`w-full p-2 border rounded bg-transparent ${dark ? 'text-white border-white/30 placeholder-white/80' : 'text-black border-gray-300 placeholder-gray-400'} focus:border-blue-500 focus:ring-0`}
             rows={4}
             value={comment}
             onChange={(e) => setComment(e.target.value)}
@@ -57,7 +59,7 @@ const CommentModal: React.FC<CommentModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-gray-200 hover:text-white"
+              className={`px-4 py-2 ${dark ? 'text-gray-200 hover:text-white' : 'text-gray-700 hover:text-black'}`}
             >
               {t('common.cancel')}
             </button>

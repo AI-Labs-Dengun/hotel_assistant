@@ -113,6 +113,7 @@
     "stopRecording": "Stop Recording",
     "recording": "Recording...",
     "processing": "Processing...",
-    "error": "Error recording audio"
+    "error": "Error recording audio",
+    "aiAssistant": "AI Assistant"
   }
 } 

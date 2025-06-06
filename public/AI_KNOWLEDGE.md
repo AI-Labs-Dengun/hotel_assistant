@@ -1,7 +1,7 @@
-Vale do Lobo Serenity Resort – Knowledge Base
+Vale do Lobo Beach Hotel – Knowledge Base
 
 Hotel Overview
-Welcome to Vale do Lobo Serenity Resort, a luxurious 5-star retreat in the heart of Vale do Lobo, Algarve. This contemporary beachfront hotel combines elegant design, exceptional comfort, and world-class amenities, offering an unforgettable experience for couples, families, and solo travellers seeking relaxation and sophistication.
+Welcome to Vale do Lobo Beach Hotel, a luxurious 5-star retreat in the heart of Vale do Lobo, Algarve. This contemporary beachfront hotel combines elegant design, exceptional comfort, and world-class amenities, offering an unforgettable experience for couples, families, and solo travellers seeking relaxation and sophistication.
 Location: Av. do Mar, Vale do Lobo, 8135-034 Almancil, Portugal
 Category: 5-star luxury resort
 Check-in: From 3:00 PM
@@ -12,7 +12,7 @@ Pets: Pets are not allowed
 Parking: Free private parking on-site
 Airport Shuttle: Available (surcharge applies)
 
-🏝️ Facilities & Services
+ Facilities & Services
 Pools: 1 outdoor infinity pool, 1 heated indoor pool with panoramic ocean views
 Wellness & Spa: Full-service spa with sauna, Turkish bath, massage therapies, yoga classes
 Dining:

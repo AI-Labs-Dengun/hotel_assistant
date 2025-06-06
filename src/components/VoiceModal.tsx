@@ -2,6 +2,7 @@ import React, { RefObject } from 'react';
 import { FaMicrophone, FaStop, FaTimes, FaVolumeUp, FaSpinner } from 'react-icons/fa';
 import { useLanguage } from '../lib/LanguageContext';
 import { useTranslation } from '../lib/i18n';
+import { useTheme } from '../app/providers/ThemeProvider';
 
 interface VoiceModalProps {
   isOpen: boolean;
@@ -22,6 +23,9 @@ const VoiceModal: React.FC<VoiceModalProps> = ({
 }) => {
   const { language } = useLanguage();
   const { t } = useTranslation(language);
+  const { dark } = useTheme();
+
+  console.log('VoiceModal dark mode:', dark); // Debug log
 
   if (!isOpen) return null;
 
@@ -33,18 +37,14 @@ const VoiceModal: React.FC<VoiceModalProps> = ({
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full"
+          className="absolute top-4 right-4 transition-colors p-2 hover:bg-white/10 rounded-full"
         >
-          <FaTimes className="text-xl" />
+          <FaTimes className={`text-xl ${dark ? '!text-white' : '!text-black'}`} />
         </button>
 
         <div className="flex flex-col items-center gap-8">
-          <h2 className="text-2xl font-bold text-white text-center drop-shadow">
-            {mode === 'ai-speaking' ? t('voice.aiSpeaking') :
-             mode === 'thinking' ? t('voice.aiThinking') :
-             mode === 'loading' ? t('voice.loading') :
-             mode === 'recording' ? t('voice.title') :
-             t('voice.title')}
+          <h2 className={`text-2xl font-bold text-center drop-shadow ${dark ? '!text-white' : '!text-black'}`}>
+            {t('voice.aiAssistant')}
           </h2>
 
           <div className="relative">
@@ -90,7 +90,7 @@ const VoiceModal: React.FC<VoiceModalProps> = ({
           )}
 
           {(mode === 'ai-speaking' || mode === 'thinking' || mode === 'loading') && (
-            <div className="text-white/90 text-center text-lg font-medium">
+            <div className={`text-center text-lg font-medium ${dark ? '!text-white' : '!text-black'}`}>
               {mode === 'ai-speaking' ? t('voice.aiSpeaking') :
                mode === 'thinking' ? t('voice.aiThinking') :
                t('voice.loading')}
